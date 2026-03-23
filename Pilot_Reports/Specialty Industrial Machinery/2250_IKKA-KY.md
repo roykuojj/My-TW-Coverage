@@ -6,13 +6,29 @@
 **市值:** 2,554 百萬台幣
 **企業價值:** 1,694 百萬台幣
 
-IKKA Holdings (Cayman) Limited manufactures, and develops plastic automotive parts and modules in Japan, China, Vietnam, Malaysia, and internationally. The company offers precision plastic injection molded parts for automobiles and electric vehicles; mold products; gears; business machine parts; and residential related equipment parts and other products. The company was founded in 1963 and is based in George Town, the Cayman Islands.
+IKKA Holdings (2250，IKKA-KY) 為日系精密塑膠射出成型廠 (1963 年創立於日本，2021 年台灣掛牌)。主要產品涵蓋汽車精密塑膠零組件與模組 (佔營收約六成)、衛浴設備零件、電動工具零件及精密陶瓷射出件。生產據點遍及日本、中國、越南、馬來西亞。汽車零件透過日系 Tier 1 如[[住友電工]]、[[愛信]] (AISIN) 供應[[Toyota]]、[[Nissan]]、[[Honda]]等車廠。衛浴客戶涵蓋[[TOTO]] (智慧馬桶座模組)。電動工具供應[[Bosch]]。
 
 ## 供應鏈位置
-*(待 [[AI]] 補充)*
+**上游 (原料):**
+- **工程塑膠:** PA/POM/PBT 等工程塑膠粒
+- **精密陶瓷:** 陶瓷粉末
+
+**中游 (製造):**
+- **IKKA** (精密射出/模具設計/模組組裝，日本/中國/越南/馬來西亞)
+
+**下游 (終端):**
+- **汽車 Tier 1:** [[住友電工]]、[[愛信]] — 供應[[Toyota]]、[[Nissan]]、[[Honda]]
+- **衛浴:** [[TOTO]] — 智慧馬桶座模組
+- **電動工具:** [[Bosch]]
 
 ## 主要客戶及供應商
-*(待 [[AI]] 補充)*
+### 主要客戶
+- **汽車:** [[住友電工]]、[[愛信]] — 終端[[Toyota]]、[[Nissan]]、[[Honda]]
+- **衛浴:** [[TOTO]] — 智慧馬桶座
+- **電動工具:** [[Bosch]]
+
+### 主要供應商
+- **工程塑膠:** PA/POM/PBT 原料廠
 
 ## 財務概況 (單位: 百萬台幣, 只有 Margin 為 %)
 ### 年度關鍵財務數據 (近 3 年)
