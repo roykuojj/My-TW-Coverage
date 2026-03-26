@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # My TW Coverage — Project Rules
 
 ## Purpose
@@ -148,9 +152,14 @@ Pilot_Reports/{Industry}/{Ticker}_{ChineseName}.md
 |---|---|---|
 | Add Ticker | `python scripts/add_ticker.py <ticker> <name>` | Generate new report with financials |
 | Update Financials | `python scripts/update_financials.py [scope]` | Refresh financial tables (3yr annual + 4Q) |
+| Update Financials (dry run) | `python scripts/update_financials.py --dry-run <ticker>` | Preview financial update without writing |
 | Update Enrichment | `python scripts/update_enrichment.py --data <json> [scope]` | Update desc/supply chain/customers |
 | Audit | `python scripts/audit_batch.py <batch> -v` | Quality check (single batch) |
 | Audit All | `python scripts/audit_batch.py --all -v` | Quality check (all completed batches) |
+
+> **Note:** `scripts/generators/` contains historical one-time migration scripts (`01_prototype.py`, `02_generate_base_reports.py`, `03_organize_reports.py`). Do not run these — they were used to bootstrap the database and are now archived.
+
+> **Note:** The `--data <json>` path in `update_enrichment.py` can be relative (resolved from project root) or absolute.
 
 ### Scope Syntax (shared across all scripts)
 ```
@@ -178,3 +187,46 @@ Pilot_Reports/{Industry}/{Ticker}_{ChineseName}.md
 ### Batch Progress
 - **Batch definitions & progress**: `task.md`
 - **Batch status**: `[x]` = completed, `[ ]` = pending
+
+**`task.md` batch format:**
+```
+- [x] **Batch 2** (Aerospace & Defense): 2208, 2630, 2634, 2644, 2645, 4541
+- [ ] **Batch 99** (Semiconductors): 2330, 2454, 3034
+```
+`audit_batch.py --all` only audits batches marked `[x]`.
+
+---
+
+## Setup
+
+```bash
+pip install yfinance pandas tabulate
+```
+
+---
+
+## Script Architecture
+
+All scripts share `scripts/utils.py` as a common backbone — it provides `find_ticker_files()`, `parse_scope_args()`, `get_batch_tickers()`, and `replace_section()`. New scripts should import from there.
+
+**Data flow for enrichment:**
+1. `add_ticker.py` — creates `.md` file with placeholder sections + financials from yfinance
+2. Research the company externally → write enrichment as JSON
+3. `update_enrichment.py --data <json>` — replaces 業務簡介/供應鏈/客戶 sections, preserves 財務概況
+4. `update_financials.py` — replaces only 財務概況 section, preserves all enrichment
+5. `audit_batch.py` — validates quality rules against final files
+
+**yfinance ticker format:** Taiwan stocks use `{ticker}.TW` suffix (e.g., `2330.TW`). Financial units are automatically converted to 百萬台幣.
+
+**Enrichment JSON schema:**
+```json
+{
+  "XXXX": {
+    "desc": "Traditional Chinese description with [[wikilinks]]...",
+    "supply_chain": "**上游 (原料與設備):**\n- ...\n**中游:**\n- ...\n**下游:**\n- ...",
+    "cust": "### 主要客戶\n- ...\n\n### 主要供應商\n- ..."
+  }
+}
+```
+
+**Slash command definitions** are in `.claude/skills/` (add-ticker.md, update-enrichment.md, update-financials.md). These expand into step-by-step instructions when invoked.
